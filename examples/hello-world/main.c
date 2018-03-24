@@ -17,11 +17,7 @@
  * @author      Ludwig Knüpfer <ludwig.knuepfer@fu-berlin.de>
  *
  * @}
- */
-
-#include <stdio.h>
-#include <periph/gpio.h>
-#include <rtctimers-millis.h>
+*
 uint32_t milliseconds_last_press = 0;
 static void btn_led_toggle(void* arg){
 	(void)arg;
@@ -39,6 +35,36 @@ int main(void)
     gpio_set(GPIO_PIN(PORT_B,0));
 
     gpio_init_int(GPIO_PIN(PORT_B,1), GPIO_IN_PU, GPIO_FALLING, btn_led_toggle, NULL);
+
+    printf("You are running RIOT on a(n) %s board.\n", RIOT_BOARD);
+    printf("This board features a(n) %s MCU.\n", RIOT_MCU);
+
+    return 0;
+}
+
+ */
+
+#include <stdio.h>
+#include <periph/gpio.h>
+#include <rtctimers-millis.h>
+uint32_t milliseconds_last_press = 0;
+
+
+
+int main(void)
+{
+    rtctimers_millis_init();
+    puts("Hello World!");
+    gpio_init(GPIO_PIN(PORT_B,0),GPIO_OUT);
+    gpio_set(GPIO_PIN(PORT_B,0));
+
+    while (1){
+        if((rtctimers_millis_now() - milliseconds_last_press)>500){
+	gpio_toggle(GPIO_PIN(PORT_B,0));
+	milliseconds_last_press = rtctimers_millis_now();
+}
+}
+
 
     printf("You are running RIOT on a(n) %s board.\n", RIOT_BOARD);
     printf("This board features a(n) %s MCU.\n", RIOT_MCU);
