@@ -15,6 +15,9 @@ DEVELHELP ?= 1
 FEATURES_REQUIRED  += periph_rtc
 FEATURES_REQUIRED  += periph_gpio
 USEMODULE += rtctimers-millis
+USEMODULE += shell
+USEMODULE += shell_commands
+USEMODULE += ps
 # Change this to 0 show compiler invocation lines by default:
 QUIET ?= 1
 
