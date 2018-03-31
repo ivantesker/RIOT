@@ -70,7 +70,7 @@ static void *process_thread(void *arg){
 	while(1){
 		msg_receive(&message);
 		gpio_toggle(GPIO_PIN(PORT_B, 0));	
-		printf("LED set to  %d\n", gpio_read(GPIO_PIN(PORT_B,0)));
+		DEBUG("LED set to  %d\n", gpio_read(GPIO_PIN(PORT_B,0)));
 	}
 	return NULL;
 }
